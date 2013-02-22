@@ -6,18 +6,35 @@
     <div class="row">
 
       <div class="span1">
-        <% form_tag "" %>
-      </div>
-      <div class="span1">
         <%= image_tag(item.image_src) %>
       </div>
 
-      <div class="span4">
-        <%= link_to item.name, item_path(item) %>
-      </div>
+      <div>
+        <div class="span4">
+          <%= link_to item.name, item_path(item) %>
+        </div>
 
-      <div class="span2">
-        $<%= qty * item.price %>
+        <div class="span2" id="price-<%= item_id %>">
+          $<%= qty * item.price %>
+        </div>
+        <br>
+        <div class="form-inline">
+          <%= form_tag "/carts/cart_items.html", :method => :post, :remote => true, :id => "qty-updater" do %>
+          <%= hidden_field_tag(:id, item.id) %>
+          <%= hidden_field_tag(:price, item.price) %>
+          <%= text_field_tag 'qty', qty, :type => 'number', :size => 2, :class => "qty" %>
+          <%= submit_tag 'Update', :class => 'btn btn-small btn-info' %>
+
+          <script type="text/javascript">
+            $('#qty-updater').bind('ajax:success', function (event, data) {
+              var dataParsed = $.parseJSON(data)
+              var newPrice = dataParsed.qty * dataParsed.price;
+              $('#price-' + dataParsed.id).html('$' + newPrice);
+            })
+          </script>
+
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
