@@ -1,33 +1,33 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>RiceCream</title>
-  <link href='http://fonts.googleapis.com/css?family=Snippet' rel='stylesheet' type='text/css'>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>RiceCream</title>
+    <link href='http://fonts.googleapis.com/css?family=Snippet' rel='stylesheet' type='text/css'>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
 
-  <div class="navbar">
-    <div class="navbar-inner">
-      <a class="brand" href='/'>RiceCream</a>
-      <ul class="nav pull-right">
+  <body>
 
-        <%= render "shared/nav_bar" %>
+    <div class="navbar">
+      <div class="navbar-inner">
+        <a class="brand" href='/'>RiceCream</a>
+        <ul class="nav pull-right">
+          <%= render "shared/nav_bar" %>
+        </ul>
+      </div>
 
-      </ul>
     </div>
 
-  </div>
-
-  <div class="container">
-
-    <div class="sidebar">
-      <%= render "shared/side_bar" %>
+    <div class="container">
+      <% unless @home_page %>
+        <div class="sidebar">
+          <%= render "shared/side_bar" %>
+        </div>
+      <% end %>
+      <%= yield %>
     </div>
-    <%= yield %>
-  </div>
+  </body>
 
-</body>
 </html>

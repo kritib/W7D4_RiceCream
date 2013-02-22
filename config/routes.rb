@@ -3,10 +3,9 @@ RiceCream::Application.routes.draw do
   root :to => 'sessions#index'
 
   resources :items
-  resource :carts do
+  resource :carts, :only => [:show, :destroy] do
     member do
-      delete "remove_item"
-      post "add_item"
+      resources :cart_items, :only => [:create, :destroy]
     end
   end
 end

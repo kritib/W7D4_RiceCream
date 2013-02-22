@@ -14,11 +14,28 @@
 
  @import 'bootstrap';
 
- body {
-
+body {
   font-family: 'Snippet', sans-serif;
- }
+}
+
+button {
+  font-family: 'Snippet', sans-serif;
+}
 
 .container {
   margin: auto;
+}
+
+.sidebar {
+  position: fixed;
+  right: 10px;
+  border: 1px solid #C8C8C8;
+  border-radius: 10px;
+  background-image: image-url('sidebar.png');
+  padding: 10px 0px 10px 0px;
+}
+
+.sidebar .nav-header {
+  color: black;
+  font-size: 16px;
 }

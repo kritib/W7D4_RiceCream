@@ -1,7 +1,34 @@
 <ul class="nav nav-list">
   <li class="nav-header">Your Cart</li>
 
+  <% cart.each do |item_id, qty| %>
+    <li>
+      <%= link_to Item.find(item_id).name, item_path(item_id) %>
+      <span class="pull-right">
+        $<%= Item.find(item_id).price * qty %>
+      </span>
+      <span>
+        <%="qty: #{qty}"%>
+      </span>
+    </li>
+  <% end %>
+  <br>
   <li>
+    <span>
+    <%= link_to 'Edit Cart', carts_path, :class => "btn btn-small" %>
+    <button class="btn btn-small" id="empty-cart">Empty Cart</button>
 
   </li>
 </ul>
+
+<script>
+  $("#empty-cart").click(function () {
+    if (confirm("Are you sure you dont want to buy anything??")) {
+      $.ajax({
+        url:  "/carts.html",
+        type: "DELETE",
+        success: function(data) { $('.sidebar').html(data) }
+      });
+    }
+  });
+</script>

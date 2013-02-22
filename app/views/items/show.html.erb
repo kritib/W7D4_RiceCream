@@ -17,8 +17,11 @@
     var url = window.location.href;
     var numbers = url.match(/\d+/g);
     var item_id = numbers[numbers.length - 1];
-    console.log(item_id);
 
+    var posting = $.post('/carts/cart_items.html', { id: item_id })
+    posting.done(function (data) {
+                   $('.sidebar').html(data);
+                 });
   });
 
 </script>
